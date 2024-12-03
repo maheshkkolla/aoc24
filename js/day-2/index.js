@@ -66,6 +66,7 @@ const howManyAreSafeWithOneException = (input) => {
 const main = () => {
     let input = fs.readFileSync("./day-2/input.txt").toString("utf-8");
     console.log("How many are safe?: ", howManyAreSafe(input));
+    console.log("How many are safe with one exception?: ", howManyAreSafeWithOneException(input));
 }
 
 export {isReportSafe, calculateNeighboursDifference, howManyAreSafe, main, howManyAreSafeWithOneException}
