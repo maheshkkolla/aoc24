@@ -3,11 +3,7 @@ const isReportSafe = (array) => {
 }
 
 const calculateNeighboursDifference = (array) => {
-    let result = [];
-    for (let i=0; i<array.length-1; i++) {
-        result.push(array[i] - array[i+1]);
-    }
-    return result;
+    return array.slice(0, -1).map((value, index) => value - array[index + 1]);
 }
 
 export {isReportSafe, calculateNeighboursDifference}
