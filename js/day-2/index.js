@@ -1,11 +1,17 @@
 const isReportSafe = (array) => {
     let differences = calculateNeighboursDifference(array);
 
-    return areAllPositive(differences);
+    console.log(differences);
+
+    return areAllPositive(differences) || areAllNegative(differences);
 }
 
 const areAllPositive = (array) => {
-    return array.reduce((item) => item > 0, true);
+    return array.reduce((result, item) => result && item > 0, true);
+}
+
+const areAllNegative = (array) => {
+    return array.reduce((result, item) => result && item < 0, true);
 }
 
 const calculateNeighboursDifference = (array) => {
