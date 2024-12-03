@@ -1,3 +1,5 @@
+import {toArray} from "../day-1/index.js";
+
 const isReportSafe = (array) => {
     let differences = calculateNeighboursDifference(array);
 
@@ -23,4 +25,12 @@ const calculateNeighboursDifference = (array) => {
     return array.slice(0, -1).map((value, index) => value - array[index + 1]);
 }
 
-export {isReportSafe, calculateNeighboursDifference}
+const howManyAreSafe = (input) => {
+    let inputInArray = input.split("\n")
+        .map(line => toArray(line));
+
+    return inputInArray.filter(report => isReportSafe(report)).length;
+
+}
+
+export {isReportSafe, calculateNeighboursDifference, howManyAreSafe}
