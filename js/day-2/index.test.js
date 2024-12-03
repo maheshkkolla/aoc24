@@ -6,10 +6,10 @@ describe("Day 2", () => {
             expect(isReportSafe([4, 3, 2, 1, 5])).toBeFalsy();
         });
 
-        // test("should return true when the numbers are in increasing order", () => {
-        //     expect(isReportSafe([1, 2, 4, 5])).toBeTruthy();
-        //     expect(isReportSafe([4, 5, 8, 9])).toBeTruthy();
-        // });
+        test("should return true when the numbers are in increasing order", () => {
+            expect(isReportSafe([1, 2, 4, 5])).toBeTruthy();
+            expect(isReportSafe([4, 5, 8, 9])).toBeTruthy();
+        });
     });
 
     describe("calculateNeighboursDifference", () => {
