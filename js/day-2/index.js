@@ -1,4 +1,5 @@
 import {toArray} from "../day-1/index.js";
+import fs from "fs";
 
 const isReportSafe = (array) => {
     let differences = calculateNeighboursDifference(array);
@@ -33,4 +34,9 @@ const howManyAreSafe = (input) => {
 
 }
 
-export {isReportSafe, calculateNeighboursDifference, howManyAreSafe}
+const main = () => {
+    let input = fs.readFileSync("./day-2/input.txt").toString("utf-8");
+    console.log("How many are safe?: ", howManyAreSafe(input));
+}
+
+export {isReportSafe, calculateNeighboursDifference, howManyAreSafe, main}
