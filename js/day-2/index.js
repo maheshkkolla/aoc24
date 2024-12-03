@@ -1,11 +1,8 @@
 const countByGroups = (list) => {
-    let result = {};
-
-    list.forEach(item => {
+    return list.reduce((result, item) => {
         result[item] = result[item] ? result[item] + 1 : 1;
-    });
-
-    return result;
+        return result;
+    }, {});
 }
 
 export {countByGroups};
