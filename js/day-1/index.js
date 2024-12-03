@@ -24,4 +24,13 @@ const calculateDifferences = (arrays) => {
     });
 }
 
-export {toArray, makeColumns, sortAll, calculateDifferences};
+const calculateTotalDistance = (input) => {
+    let inputInArray = input.split("\n")
+        .map(line => toArray(line));
+    let columns = makeColumns(inputInArray);
+    let sortedColumns = sortAll(columns);
+    let differences = calculateDifferences(sortedColumns);
+    return differences.reduce((a,b) => a+b, 0);
+}
+
+export {toArray, makeColumns, sortAll, calculateDifferences, calculateTotalDistance};

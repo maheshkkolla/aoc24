@@ -1,4 +1,4 @@
-import {toArray, makeColumns, sortAll, calculateDifferences} from "./index";
+import {toArray, makeColumns, sortAll, calculateDifferences, calculateTotalDistance} from "./index";
 
 describe("Day 1", () => {
     describe("toArray should convert the input to array ", () => {
@@ -43,5 +43,13 @@ describe("Day 1", () => {
             let actual = calculateDifferences(input);
             expect(actual).toEqual([1, 1, 2]);
         });
+    });
+
+    describe("calculateTotalDistance", () => {
+       test("should get the total of the differences", () => {
+          let input = "3   4\n" + "4   3\n" + "2   5\n" + "1   3\n" + "3   9\n" + "3   3";
+          let actual = calculateTotalDistance(input);
+          expect(actual).toEqual(11);
+       })
     });
 });
