@@ -15,6 +15,12 @@ describe("Day 2", () => {
             expect(isReportSafe([9, 7, 5, 4])).toBeTruthy();
             expect(isReportSafe([3, 2, 1, 0])).toBeTruthy();
         });
+
+        test("should return false when the difference is not between one and three", () => {
+            expect(isReportSafe([9, 5, 4])).toBeFalsy();
+            expect(isReportSafe([30, 2, 1, 0])).toBeFalsy();
+            expect(isReportSafe([1, 2, 6, 7])).toBeFalsy();
+        });
     });
 
     describe("calculateNeighboursDifference", () => {
