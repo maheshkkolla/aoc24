@@ -4,5 +4,15 @@ const toArray = (input) => {
         .map(i => parseInt(i));
 }
 
+const makeColumns = (rows) => {
+    let result = [];
 
-export { toArray };
+    rows.forEach(row => {
+        row.forEach((item, index) => {
+            result[index] = result[index] ? [...result[index], item] : [item];
+        });
+    });
+    return result;
+}
+
+export {toArray, makeColumns};
