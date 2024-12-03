@@ -1,4 +1,4 @@
-import {toArray, makeColumns, sortAll} from "./index";
+import {toArray, makeColumns, sortAll, calculateDifferences} from "./index";
 
 describe("Day 1", () => {
     describe("toArray should convert the input to array ", () => {
@@ -28,6 +28,20 @@ describe("Day 1", () => {
             let input = [[2, 1, 7], [5, 2, 0]];
             let actual = sortAll(input);
             expect(actual).toEqual([[1, 2, 7], [0, 2, 5]]);
+        });
+    });
+
+    describe("calculateDifferences", () => {
+        test("should calculate the difference of each row", () => {
+            let input = [[1, 2, 7], [0, 2, 5]];
+            let actual = calculateDifferences(input);
+            expect(actual).toEqual([1, 0, 2]);
+        });
+
+        test("should consider the greater number either side", () => {
+            let input = [[0, 3, 5], [1, 2, 7]];
+            let actual = calculateDifferences(input);
+            expect(actual).toEqual([1, 1, 2]);
         });
     });
 });

@@ -18,5 +18,10 @@ const makeColumns = (rows) => {
 const sortAll = (arrays) => {
     return arrays.map(array => array.sort());
 }
+const calculateDifferences = (arrays) => {
+    return arrays[0].map((first, index) => {
+       return Math.abs(first - arrays[1][index]);
+    });
+}
 
-export {toArray, makeColumns, sortAll};
+export {toArray, makeColumns, sortAll, calculateDifferences};
