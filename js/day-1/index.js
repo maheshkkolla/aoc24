@@ -40,5 +40,4 @@ const main = () => {
     console.log("Result: ", calculateTotalDistance(input));
 }
 
-export default { main };
 export {toArray, makeColumns, sortAll, calculateDifferences, calculateTotalDistance, main};

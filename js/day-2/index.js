@@ -1,4 +1,5 @@
-import {makeColumns, toArray} from "../day-1/index.js";
+import {calculateTotalDistance, makeColumns, toArray} from "../day-1/index.js";
+import fs from "fs";
 
 
 const getOrDefault = (item, defaultValue) => {
@@ -24,4 +25,9 @@ const calculateTotalSimilarityScore = (input) => {
 
 }
 
-export {countByGroups, calculateTotalSimilarityScore};
+const main = () => {
+    let input = fs.readFileSync("./day-1/input.txt").toString("utf-8");
+    console.log("Result: ", calculateTotalSimilarityScore(input));
+}
+
+export {countByGroups, calculateTotalSimilarityScore, main};
