@@ -15,4 +15,8 @@ const makeColumns = (rows) => {
     return result;
 }
 
-export {toArray, makeColumns};
+const sortAll = (arrays) => {
+    return arrays.map(array => array.sort());
+}
+
+export {toArray, makeColumns, sortAll};
