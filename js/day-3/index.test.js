@@ -1,4 +1,4 @@
-import {getMatchedInstructions, executeInstruction, executeAll} from "./index.js";
+import {getMatchedInstructions, executeInstruction, executeAll, part2} from "./index.js";
 describe("Day 3", () => {
     describe("getMatchedInstructions", () => {
         test("should return all the matched mul instructions", () => {
@@ -23,6 +23,15 @@ describe("Day 3", () => {
             let input = "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))";
 
             expect(executeAll(input)).toEqual(161);
+        });
+    });
+
+    describe("part2", () => {
+        test("should give the result of the all instructions afte removing the corrupted instructions", () => {
+
+            let input = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))";
+
+            expect(part2(input)).toEqual(48);
         });
     });
 });
