@@ -50,6 +50,6 @@ describe("Day 1", () => {
           let input = "3   4\n" + "4   3\n" + "2   5\n" + "1   3\n" + "3   9\n" + "3   3";
           let actual = calculateTotalDistance(input);
           expect(actual).toEqual(11);
-       })
+       });
     });
 });

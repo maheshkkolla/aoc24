@@ -1,3 +1,5 @@
+import fs from "fs";
+
 const toArray = (input) => {
     return input.split(" ")
         .filter(i => !!i)
@@ -32,5 +34,12 @@ const calculateTotalDistance = (input) => {
     let differences = calculateDifferences(sortedColumns);
     return differences.reduce((a,b) => a+b, 0);
 }
+
+const main = () => {
+    let input = fs.readFileSync("./day-1/input.txt").toString("utf-8");
+    console.log("Result: ", calculateTotalDistance(input));
+}
+
+main();
 
 export {toArray, makeColumns, sortAll, calculateDifferences, calculateTotalDistance};
