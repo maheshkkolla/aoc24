@@ -1,4 +1,4 @@
-import {getCombinations, getWordFrom, toMatrix, countWord, getCombinationsForX} from "./index.js";
+import {getCombinations, getWordFrom, toMatrix, countWord, getCombinationsForX, countWordPart2} from "./index.js";
 
 describe("Day 4", () => {
     describe("getCombinations", () => {
@@ -109,6 +109,13 @@ describe("Day 4", () => {
         test("should count the word in all directions", () => {
             var input = "MMMSXXMASM\n" + "MSAMXMSMSA\n" + "AMXSXMAAMM\n" + "MSAMASMSMX\n" + "XMASAMXAMM\n" + "XXAMMXXAMA\n" + "SMSMSASXSS\n" + "SAXAMASAAA\n" + "MAMMMXMMMM\n" + "MXMXAXMASX";
             expect(countWord(input)).toEqual(18);
+        });
+    });
+
+    describe("countWordPart2", () => {
+        test("should count the word in all directions", () => {
+            var input = "MMMSXXMASM\n" + "MSAMXMSMSA\n" + "AMXSXMAAMM\n" + "MSAMASMSMX\n" + "XMASAMXAMM\n" + "XXAMMXXAMA\n" + "SMSMSASXSS\n" + "SAXAMASAAA\n" + "MAMMMXMMMM\n" + "MXMXAXMASX";
+            expect(countWordPart2(input)).toEqual(9);
         });
     });
 });

@@ -54,6 +54,31 @@ const countWord = (input) => {
     return counter;
 }
 
+const countWordPart2 = (input) => {
+    let matrix = toMatrix(input);
+    let counter = 0;
+
+    matrix.forEach((row, x) => {
+       row.forEach((item, y) => {
+           if(item === "A") {
+               let combinations = getCombinationsForX(x, y);
+               let combinationCounter = 0;
+               combinations.forEach(combination => {
+                   let word = getWordFrom(combination, matrix);
+                   if(word === "MAS") {
+                       combinationCounter = combinationCounter + 1;
+                   }
+               });
+               if(combinationCounter >= 2) {
+                   counter = counter + 1;
+               }
+           }
+       });
+    });
+
+    return counter;
+}
+
 const toMatrix = (input) => {
     return input.split("\n").map(line => line.split(""));
 }
@@ -61,6 +86,7 @@ const toMatrix = (input) => {
 const main = () => {
     let input = fs.readFileSync("./day-4/input.txt").toString("utf-8");
     console.log("Count ", countWord(input));
+    console.log("Count ", countWordPart2(input));
 }
 
-export {getCombinations, getWordFrom, toMatrix, countWord, main, getCombinationsForX};
+export {getCombinations, getWordFrom, toMatrix, countWord, main, getCombinationsForX, countWordPart2};
