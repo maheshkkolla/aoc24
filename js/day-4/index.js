@@ -7,4 +7,10 @@ const getCombinations = (x, y) => {
     ];
 };
 
-export {getCombinations}
+const getWordFrom = (input, array) => {
+    return input.map(([x, y]) => {
+        return array[x] ? array[x][y] : "";
+    }).join("");
+}
+
+export {getCombinations, getWordFrom}
