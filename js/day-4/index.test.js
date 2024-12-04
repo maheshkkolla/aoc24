@@ -1,4 +1,4 @@
-import {getCombinations, getWordFrom} from "./index.js";
+import {getCombinations, getWordFrom, toMatrix, countWord} from "./index.js";
 describe("Day 4", () => {
     describe("getCombinations", () => {
         test("should get the right combination", () => {
@@ -19,6 +19,26 @@ describe("Day 4", () => {
         test("should get the top combination", () => {
             let actual = getCombinations(5,5);
             expect(actual[3]).toEqual([[5,5],[4,5],[3,5],[2,5]]);
+        });
+
+        test("should get the diagonal combination - top right", () => {
+            let actual = getCombinations(5,5);
+            expect(actual[4]).toEqual([[5,5],[6,6],[7,7],[8,8]]);
+        });
+
+        test("should get the diagonal combination - top left", () => {
+            let actual = getCombinations(5,5);
+            expect(actual[5]).toEqual([[5,5],[4,4],[3,3],[2,2]]);
+        });
+
+        test("should get the diagonal combination - bottom left", () => {
+            let actual = getCombinations(5,5);
+            expect(actual[6]).toEqual([[5,5],[6,4],[7,3],[8,2]]);
+        });
+
+        test("should get the diagonal combination - bottom right", () => {
+            let actual = getCombinations(5,5);
+            expect(actual[7]).toEqual([[5,5],[4,6],[3,7],[2,8]]);
         });
     });
 
@@ -50,5 +70,22 @@ describe("Day 4", () => {
            let actual = getWordFrom(input, fullArray);
            expect(actual).toEqual("");
         });
+    });
+
+    describe("toMatrix", () => {
+       let input = "MMMSXXMASM\n" + "MSAMXMSMSA\n" + "AMXSXMAAMM";
+       let actual = toMatrix(input);
+       expect(actual).toEqual([
+           ['M', 'M', 'M', 'S', 'X', 'X', 'M', 'A', 'S', 'M'],
+           ['M', 'S', 'A', 'M', 'X', 'M', 'S', 'M', 'S', 'A'],
+           ['A', 'M', 'X', 'S', 'X', 'M', 'A', 'A', 'M', 'M']
+       ]);
+    });
+
+    describe("countWord", () => {
+       test("should count the word in all directions", () => {
+           var input = "MMMSXXMASM\n" + "MSAMXMSMSA\n" + "AMXSXMAAMM\n" + "MSAMASMSMX\n" + "XMASAMXAMM\n" + "XXAMMXXAMA\n" + "SMSMSASXSS\n" + "SAXAMASAAA\n" + "MAMMMXMMMM\n" + "MXMXAXMASX";
+           expect(countWord(input)).toEqual(18);
+       });
     });
 });

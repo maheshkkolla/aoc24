@@ -3,7 +3,11 @@ const getCombinations = (x, y) => {
         [[x, y], [x, y+1], [x, y+2], [x, y+3]],
         [[x, y], [x, y-1], [x, y-2], [x, y-3]],
         [[x, y], [x+1, y], [x+2, y], [x+3, y]],
-        [[x, y], [x-1, y], [x-2, y], [x-3, y]]
+        [[x, y], [x-1, y], [x-2, y], [x-3, y]],
+        [[x, y], [x+1, y+1], [x+2, y+2], [x+3, y+3]],
+        [[x, y], [x-1, y-1], [x-2, y-2], [x-3, y-3]],
+        [[x, y], [x+1, y-1], [x+2, y-2], [x+3, y-3]],
+        [[x, y], [x-1, y+1], [x-2, y+2], [x-3, y+3]],
     ];
 };
 
@@ -13,4 +17,31 @@ const getWordFrom = (input, array) => {
     }).join("");
 }
 
-export {getCombinations, getWordFrom}
+const countWord = (input) => {
+    let matrix = toMatrix(input);
+    let allCombinations = [];
+
+    matrix.forEach((row, x) => {
+       row.forEach((item, y) => {
+           if(item === "X") {
+               let combinations = getCombinations(x, y);
+               allCombinations = [...allCombinations, ...combinations];
+           }
+       });
+    });
+
+    let counter = 0;
+    allCombinations.forEach(combination => {
+       let word = getWordFrom(combination, matrix);
+       if(word === "XMAS") {
+           counter = counter + 1;
+       }
+    });
+    return counter;
+}
+
+const toMatrix = (input) => {
+    return input.split("\n").map(line => line.split(""));
+}
+
+export {getCombinations, getWordFrom, toMatrix, countWord};
