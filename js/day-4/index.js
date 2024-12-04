@@ -1,3 +1,5 @@
+import fs from "fs";
+
 const getCombinations = (x, y) => {
     return [
         [[x, y], [x, y+1], [x, y+2], [x, y+3]],
@@ -8,6 +10,18 @@ const getCombinations = (x, y) => {
         [[x, y], [x-1, y-1], [x-2, y-2], [x-3, y-3]],
         [[x, y], [x+1, y-1], [x+2, y-2], [x+3, y-3]],
         [[x, y], [x-1, y+1], [x-2, y+2], [x-3, y+3]],
+    ];
+};
+
+
+const getCombinationsForX = (x, y) => {
+    return [
+        [[x-1, y-1], [x, y], [x+1, y+1]],
+        [[x-1, y+1], [x,y], [x+1, y-1]],
+        [[x+1,y-1], [x,y], [x-1, y+1]],
+        [[x+1, y+1], [x, y], [x-1, y-1]],
+
+
     ];
 };
 
@@ -44,4 +58,9 @@ const toMatrix = (input) => {
     return input.split("\n").map(line => line.split(""));
 }
 
-export {getCombinations, getWordFrom, toMatrix, countWord};
+const main = () => {
+    let input = fs.readFileSync("./day-4/input.txt").toString("utf-8");
+    console.log("Count ", countWord(input));
+}
+
+export {getCombinations, getWordFrom, toMatrix, countWord, main, getCombinationsForX};
