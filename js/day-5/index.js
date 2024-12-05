@@ -44,10 +44,32 @@ const total = (input) => {
         .reduce((a,b) => a + b, 0);
 }
 
+const filterApplicableRules = (rules, input) => {
+    return rules.filter(([a, b]) => input.includes(a) && input.includes(b));
+}
+
 const main = () => {
     let input = fs.readFileSync("./day-5/input.txt").toString("utf-8");
     console.log("Total: ", total(input));
 }
 
 
-export {createRule, createRules, checkRule, checkRules, getMiddle, total, main};
+export {createRule, createRules, checkRule, checkRules, getMiddle, total, main, filterApplicableRules};
+
+
+// 97,13,75,29,47
+//
+// 97|13
+// 97|47
+// 75|29
+// 29|13
+// 97|29
+// 47|13
+// 75|47
+// 97|75
+// 47|29
+// 75|13
+
+
+
+

@@ -1,4 +1,4 @@
-import {createRule, createRules, checkRule, checkRules, getMiddle, total} from "./index.js";
+import {createRule, createRules, checkRule, checkRules, getMiddle, total, filterApplicableRules} from "./index.js";
 
 describe("Day 5", () => {
     describe("createRules", () => {
@@ -60,6 +60,16 @@ describe("Day 5", () => {
                "\n"
                + "75,47,61,53,29\n" + "97,61,53,29,13\n" + "75,29,13\n" + "75,97,47,61,53\n" + "61,13,29\n" + "97,13,75,29,47";
            expect(total(input)).toEqual(143);
+       });
+    });
+
+    describe("filterApplicableRules", () => {
+       test("should filter rules that can be applied to the input", () => {
+           let rules  = [[47, 53], [97, 13], [97, 61], [97, 47], [75, 29], [61, 13], [75, 53], [29, 13], [97, 29], [53, 29],
+               [61, 53], [97, 53], [61, 29], [47, 13], [75, 47], [97, 75], [47, 61], [75, 61], [47, 29], [75, 13], [53, 13]];
+          let actual = filterApplicableRules(rules, [97,13,75,29,47]);
+
+          expect(actual).toEqual([[97,13], [97, 47], [75, 29], [29, 13], [97, 29], [47, 13], [75, 47], [97, 75], [47, 29], [75, 13]]);
        });
     });
 });
