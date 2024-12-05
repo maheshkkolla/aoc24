@@ -48,13 +48,46 @@ const filterApplicableRules = (rules, input) => {
     return rules.filter(([a, b]) => input.includes(a) && input.includes(b));
 }
 
+const getUpstreams = (input, rules) => {
+    return rules.filter(rule => rule[1] === input).map(([a, b]) => a);
+}
+
+const hasAllUpstreams = (array, upstreams) => {
+    return upstreams.reduce((result, item) => {
+        return result && array.includes(item);
+    }, true);
+}
+
+const fixSequenceWithFilteredRules = (input, rules, givenResult) => {
+    let result = [...givenResult];
+    let remaining = [];
+    input.forEach(item => {
+        let upstreams  = getUpstreams(item, rules);
+        if(hasAllUpstreams(result, upstreams)) {
+            result.push(item);
+        } else {
+            remaining.push(item);
+        }
+    });
+
+    if(remaining.length > 0) {
+        return fixSequenceWithFilteredRules(remaining, rules, result);
+    }
+    return result;
+}
+
+const fixSequence = (input, allRules) => {
+    let rules = filterApplicableRules(allRules, input);
+    return fixSequenceWithFilteredRules(input, rules, []);
+}
+
 const main = () => {
     let input = fs.readFileSync("./day-5/input.txt").toString("utf-8");
     console.log("Total: ", total(input));
 }
 
 
-export {createRule, createRules, checkRule, checkRules, getMiddle, total, main, filterApplicableRules};
+export {createRule, createRules, checkRule, checkRules, getMiddle, total, main, filterApplicableRules, getUpstreams, fixSequence};
 
 
 // 97,13,75,29,47
