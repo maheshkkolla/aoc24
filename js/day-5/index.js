@@ -96,24 +96,13 @@ const totalAfterFixing = (input) => {
 const main = () => {
     let input = fs.readFileSync("./day-5/input.txt").toString("utf-8");
     console.log("Total: ", total(input));
+    console.log("Total part 2:", totalAfterFixing(input));
 }
 
 
 export {createRule, createRules, checkRule, checkRules, getMiddle, total, main, filterApplicableRules, getUpstreams, fixSequence, totalAfterFixing};
 
 
-// 97,13,75,29,47
-//
-// 97|13
-// 97|47
-// 75|29
-// 29|13
-// 97|29
-// 47|13
-// 75|47
-// 97|75
-// 47|29
-// 75|13
 
 
 
