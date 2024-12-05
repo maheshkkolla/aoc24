@@ -34,16 +34,6 @@ const getMiddle = (array) => {
     return array[Math.floor(array.length/2)];
 }
 
-const total = (input) => {
-    let [rulesString, inputString] = input.split("\n\n");
-    let rules = createRules(rulesString);
-    let inputs = createInputs(inputString);
-
-    return inputs.filter(input => checkRules(input, rules))
-        .map(getMiddle)
-        .reduce((a,b) => a + b, 0);
-}
-
 const filterApplicableRules = (rules, input) => {
     return rules.filter(([a, b]) => input.includes(a) && input.includes(b));
 }
@@ -81,13 +71,35 @@ const fixSequence = (input, allRules) => {
     return fixSequenceWithFilteredRules(input, rules, []);
 }
 
+const total = (input) => {
+    let [rulesString, inputString] = input.split("\n\n");
+    let rules = createRules(rulesString);
+    let inputs = createInputs(inputString);
+
+    return inputs.filter(input => checkRules(input, rules))
+        .map(getMiddle)
+        .reduce((a,b) => a + b, 0);
+}
+
+const totalAfterFixing = (input) => {
+    let [rulesString, inputString] = input.split("\n\n");
+    let rules = createRules(rulesString);
+    let inputs = createInputs(inputString);
+
+    return inputs.filter(input => !checkRules(input, rules))
+        .map(input => fixSequence(input, rules))
+        .map(getMiddle)
+        .reduce((a,b) => a + b, 0);
+}
+
+
 const main = () => {
     let input = fs.readFileSync("./day-5/input.txt").toString("utf-8");
     console.log("Total: ", total(input));
 }
 
 
-export {createRule, createRules, checkRule, checkRules, getMiddle, total, main, filterApplicableRules, getUpstreams, fixSequence};
+export {createRule, createRules, checkRule, checkRules, getMiddle, total, main, filterApplicableRules, getUpstreams, fixSequence, totalAfterFixing};
 
 
 // 97,13,75,29,47
