@@ -1,3 +1,6 @@
+import fs from "fs";
+import {calculateTotalDistance} from "../day-1/index.js";
+
 const createRule = (input) => {
     return input.split("|").map(item => parseInt(item));
 }
@@ -41,5 +44,10 @@ const total = (input) => {
         .reduce((a,b) => a + b, 0);
 }
 
+const main = () => {
+    let input = fs.readFileSync("./day-5/input.txt").toString("utf-8");
+    console.log("Total: ", total(input));
+}
 
-export {createRule, createRules, checkRule, checkRules, getMiddle, total};
+
+export {createRule, createRules, checkRule, checkRules, getMiddle, total, main};
