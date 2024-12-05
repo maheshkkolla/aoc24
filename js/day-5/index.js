@@ -2,6 +2,10 @@ const createRule = (input) => {
     return input.split("|").map(item => parseInt(item));
 }
 
+const createInputs = (inputs) => {
+    return inputs.split("\n").map(input => input.split(",").map(item => parseInt(item)));
+}
+
 const createRules = (input) => {
     return input.split("\n").map(createRule);
 }
@@ -27,5 +31,15 @@ const getMiddle = (array) => {
     return array[Math.floor(array.length/2)];
 }
 
+const total = (input) => {
+    let [rulesString, inputString] = input.split("\n\n");
+    let rules = createRules(rulesString);
+    let inputs = createInputs(inputString);
 
-export {createRule, createRules, checkRule, checkRules, getMiddle};
+    return inputs.filter(input => checkRules(input, rules))
+        .map(getMiddle)
+        .reduce((a,b) => a + b, 0);
+}
+
+
+export {createRule, createRules, checkRule, checkRules, getMiddle, total};
