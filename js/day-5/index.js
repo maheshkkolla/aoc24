@@ -2,4 +2,8 @@ const createRule = (input) => {
     return input.split("|").map(item => parseInt(item));
 }
 
-export {createRule};
+const createRules = (input) => {
+    return input.split("\n").map(createRule);
+}
+
+export {createRule, createRules};
