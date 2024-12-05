@@ -6,4 +6,21 @@ const createRules = (input) => {
     return input.split("\n").map(createRule);
 }
 
-export {createRule, createRules};
+const checkRule = (input, rule) => {
+    let firstIndex = input.indexOf(rule[0]);
+    let secondIndex = input.indexOf(rule[1]);
+
+    if(firstIndex === -1 || secondIndex === -1) {
+        return true;
+    }
+
+    return firstIndex < secondIndex;
+}
+
+const checkRules = (input, rules) => {
+    return rules.reduce((result, rule) => {
+        return result && checkRule(input, rule);
+    } , true);
+}
+
+export {createRule, createRules, checkRule, checkRules};
