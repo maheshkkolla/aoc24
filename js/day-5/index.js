@@ -23,4 +23,9 @@ const checkRules = (input, rules) => {
     } , true);
 }
 
-export {createRule, createRules, checkRule, checkRules};
+const getMiddle = (array) => {
+    return array[Math.floor(array.length/2)];
+}
+
+
+export {createRule, createRules, checkRule, checkRules, getMiddle};

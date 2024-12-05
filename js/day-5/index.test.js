@@ -1,4 +1,4 @@
-import {createRule, createRules, checkRule, checkRules} from "./index.js";
+import {createRule, createRules, checkRule, checkRules, getMiddle} from "./index.js";
 
 describe("Day 5", () => {
     describe("createRules", () => {
@@ -43,7 +43,14 @@ describe("Day 5", () => {
            expect(checkRules([75,29,13], rules)).toBeTruthy();
            expect(checkRules([75,97,47,61,53], rules)).toBeFalsy();
            expect(checkRules([97,13,75,29,47], rules)).toBeFalsy();
+       });
+    });
 
+    describe("getMiddle", () => {
+       test("should get the middle element in the array", () => {
+           expect(getMiddle([75,47,61,53,29])).toEqual(61);
+           expect(getMiddle([97,61,53,29,13])).toEqual(53);
+           expect(getMiddle([75,29,13])).toEqual(29);
        });
     });
 });
