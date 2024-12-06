@@ -1,4 +1,4 @@
-import {convertToMatrix, findGuard, getNextLocation, moveGuardTo, turnGuard, hasAny, isOutOfMatrix} from "./index.js";
+import {convertToMatrix, findGuard, getNextLocation, moveGuardTo, turnGuard, hasAny, isOutOfMatrix, totalLocations} from "./index.js";
 
 describe("Day 6", () => {
 
@@ -118,6 +118,14 @@ describe("Day 6", () => {
             expect(isOutOfMatrix(matrix, [0, -1])).toBeTruthy();
             expect(isOutOfMatrix(matrix, [10, 5])).toBeTruthy();
             expect(isOutOfMatrix(matrix, [2, 10])).toBeTruthy();
+        });
+    });
+
+    describe("totalLocations", () => {
+        test("should give total the visited locations", () => {
+            var input = "....#.....\n" + ".........#\n" + "..........\n" + "..#.......\n" + ".......#..\n" + "..........\n" + ".#..^.....\n" + "........#.\n" + "#.........\n" + "......#...";
+            let actual = totalLocations(input);
+            expect(actual).toEqual(41);
         });
     });
 });
