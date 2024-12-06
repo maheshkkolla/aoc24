@@ -39,7 +39,25 @@ const getTopLocation = ([x, y]) => {
 
 const turnGuard = (givenMatrix, [x, y]) => {
     let matrix  = structuredClone(givenMatrix);
-    matrix[x][y] = ">";
+    let direction = matrix[x][y];
+    let newDirection;
+    if(direction === "^") {
+        newDirection = ">";
+    }
+
+    if(direction === ">") {
+        newDirection = "v";
+    }
+
+    if(direction === "v") {
+        newDirection = "<";
+    }
+
+    if(direction === "<") {
+        newDirection = "^";
+    }
+
+    matrix[x][y] = newDirection;
     return matrix;
 }
 

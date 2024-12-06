@@ -70,9 +70,22 @@ describe("Day 6", () => {
            expect(newMatrix[6][4]).toEqual(">");
        });
 
-       // test("should turn the guard down", () => {
-       //     let newMatrix = turnGuard(turnGuard(matrix));
-       //     expect(newMatrix[6][4]).toEqual("v");
-       // });
+       test("should turn the guard down", () => {
+           let location = [6, 4];
+           let newMatrix = turnGuard(turnGuard(matrix, location), location);
+           expect(newMatrix[6][4]).toEqual("v");
+       });
+
+       test("should turn the guard left", () => {
+           let location = [6, 4];
+           let newMatrix = turnGuard(turnGuard(turnGuard(matrix, location), location), location);
+           expect(newMatrix[6][4]).toEqual("<");
+       });
+
+       test("should turn the guard up", () => {
+           let location = [6, 4];
+           let newMatrix = turnGuard(turnGuard(turnGuard(turnGuard(matrix, location), location), location), location);
+           expect(newMatrix[6][4]).toEqual("^");
+       });
     });
 });
