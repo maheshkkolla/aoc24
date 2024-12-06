@@ -1,4 +1,4 @@
-import {convertToMatrix, findGuard, getNextLocation, moveGuardTo, turnGuard, hasAny, isOutOfMatrix, totalLocations, isInLoop} from "./index.js";
+import {convertToMatrix, findGuard, getNextLocation, moveGuardTo, turnGuard, hasAny, isOutOfMatrix, totalLocations, isInLoop, totalPart2} from "./index.js";
 
 describe("Day 6", () => {
 
@@ -142,12 +142,19 @@ describe("Day 6", () => {
                [".", ".", "#", ".", ".", ".", ".", ".", ".", "."],
                [".", ".", ".", ".", ".", ".", ".", "#", ".", "."],
                [".", ".", ".", ".", ".", ".", ".", ".", ".", "."],
-               [".", "#", ".", "#", "^", ".", ".", ".", ".", "."],
+               [".", "#", ".", "0", "^", ".", ".", ".", ".", "."],
                [".", ".", ".", ".", ".", ".", ".", ".", "#", "."],
                ["#", ".", ".", ".", ".", ".", ".", ".", ".", "."],
                [".", ".", ".", ".", ".", ".", "#", ".", ".", "."],
            ];
            expect(isInLoop(loopMatrix)).toBeTruthy();
        });
+    });
+
+    describe("totalPart2", () => {
+        test("should get the total", () => {
+            var input = "....#.....\n" + ".........#\n" + "..........\n" + "..#.......\n" + ".......#..\n" + "..........\n" + ".#..^.....\n" + "........#.\n" + "#.........\n" + "......#...";
+            expect(totalPart2(input)).toEqual(6);
+        });
     });
 });

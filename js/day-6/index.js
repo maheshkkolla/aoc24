@@ -28,8 +28,8 @@ const findGuard = (matrix) => {
     return [];
 }
 
-const moveGuardTo = (givenMatrix, [oldX, oldY], [x, y]) => {
-    let matrix = structuredClone(givenMatrix);
+const moveGuardTo = (matrix, [oldX, oldY], [x, y]) => {
+    // let matrix = deepClone(givenMatrix);
     matrix[x][y] = matrix[oldX][oldY];
     matrix[oldX][oldY] = "X";
     return matrix;
@@ -54,8 +54,8 @@ const getNextLocation = ([x, y], direction) => {
     }
 }
 
-const turnGuard = (givenMatrix, [x, y]) => {
-    let matrix = structuredClone(givenMatrix);
+const turnGuard = (matrix, [x, y]) => {
+    // let matrix = deepClone(givenMatrix);
     let direction = matrix[x][y];
     let newDirection;
     if (direction === "^") {
@@ -89,8 +89,8 @@ const isOutOfMatrix = (matrix, [x, y]) => {
 
 const countVisitedLocations = (matrix) => {
     return matrix.reduce((total, row) => {
-        return total + row.reduce((total, item) =>  {
-            if(item === "X") {
+        return total + row.reduce((total, item) => {
+            if (item === "X") {
                 return total + 1;
             }
             return total;
@@ -104,7 +104,7 @@ const totalLocations = (input) => {
     while (!isOutOfMatrix(matrix, currentLocation)) {
         let nextLocation = getNextLocation(currentLocation, matrix[currentLocation[0]][currentLocation[1]]);
 
-        if(isOutOfMatrix(matrix, nextLocation)) {
+        if (isOutOfMatrix(matrix, nextLocation)) {
             matrix[currentLocation[0]][currentLocation[1]] = "X";
             break;
         }
@@ -122,7 +122,7 @@ const totalLocations = (input) => {
 }
 
 const isInLoop = (givenMatrix) => {
-    let matrix = structuredClone(givenMatrix);
+    let matrix = deepClone(givenMatrix);
     let currentLocation = findGuard(matrix);
     let traversed = {};
     while (!isOutOfMatrix(matrix, currentLocation)) {
@@ -130,19 +130,18 @@ const isInLoop = (givenMatrix) => {
         let nextLocation = getNextLocation(currentLocation, currentDirection);
 
         let key = `${currentLocation}-${currentDirection}`;
-        if(traversed[key]) {
+        if (traversed[key]) {
             return true;
         }
         traversed[key] = true;
 
 
-
-        if(isOutOfMatrix(matrix, nextLocation)) {
+        if (isOutOfMatrix(matrix, nextLocation)) {
             matrix[currentLocation[0]][currentLocation[1]] = "X";
             break;
         }
 
-        if (matrix[nextLocation[0]][nextLocation[1]] === "#") {
+        if (matrix[nextLocation[0]][nextLocation[1]] === "#" || matrix[nextLocation[0]][nextLocation[1]] === "0") {
             matrix = turnGuard(matrix, currentLocation);
             continue;
         }
@@ -154,10 +153,54 @@ const isInLoop = (givenMatrix) => {
     return false;
 }
 
+const totalPart2 = (input) => {
+    let matrix = convertToMatrix(input);
+    let total = 0;
+
+    matrix.forEach((row, x) => {
+        row.forEach((item, y) => {
+            if (item === '.') {
+                matrix[x][y] = "0";
+
+                if (isInLoop(matrix)) {
+                    total = total + 1;
+                }
+
+                matrix[x][y] = "."
+            }
+        });
+    });
+
+    return total;
+}
+
+function deepClone(o) {
+    if(typeof o === 'string') { return o; }
+
+    let newO = [];
+    for (var i = 0; i < o.length; i++) {
+        newO[i] = deepClone(o[i]);
+    }
+    return newO;
+}
+
 
 const main = () => {
     let input = fs.readFileSync("./day-6/input.txt").toString("utf-8");
-    console.log("Total: ", totalLocations(input));
+    // console.log("Total: ", totalLocations(input));
+    console.log("Total Part 2: ", totalPart2(input));
 }
 
-export {convertToMatrix, findGuard, getNextLocation, moveGuardTo, turnGuard, hasAny, isOutOfMatrix, totalLocations, main, isInLoop};
+export {
+    convertToMatrix,
+    findGuard,
+    getNextLocation,
+    moveGuardTo,
+    turnGuard,
+    hasAny,
+    isOutOfMatrix,
+    totalLocations,
+    main,
+    isInLoop,
+    totalPart2
+};
