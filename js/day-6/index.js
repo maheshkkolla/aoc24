@@ -28,8 +28,8 @@ const findGuard = (matrix) => {
 
 const moveGuardTo = (givenMatrix, [oldX, oldY], [x, y]) => {
     let matrix  = structuredClone(givenMatrix);
+    matrix[x][y] = matrix[oldX][oldY];
     matrix[oldX][oldY] = "X";
-    matrix[x][y] = "^";
     return matrix;
 };
 

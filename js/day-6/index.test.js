@@ -58,6 +58,11 @@ describe("Day 6", () => {
             expect(findGuard(newMatrix)).toEqual([5, 4]);
         });
 
+        test("should move the right guard to the new given location", () => {
+            let newMatrix = moveGuardTo(turnGuard(matrix, [6, 4]), [6, 4],[6, 5]);
+            expect(findGuard(newMatrix)).toEqual([6, 5]);
+        });
+
         test("should mark old location", () => {
             let newMatrix = moveGuardTo(matrix, [6, 4],[5, 4]);
             expect(newMatrix[6][4]).toEqual("X");
