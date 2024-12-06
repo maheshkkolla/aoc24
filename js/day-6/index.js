@@ -1,3 +1,5 @@
+import fs from "fs";
+
 const convertToMatrix = (input) => {
     return input.split("\n")
         .map(line => line.split(""));
@@ -99,7 +101,7 @@ const countVisitedLocations = (matrix) => {
 const totalLocations = (input) => {
     let matrix = convertToMatrix(input);
     let currentLocation = findGuard(matrix);
-    while (true) {
+    while (!isOutOfMatrix(matrix, currentLocation)) {
         let nextLocation = getNextLocation(currentLocation, matrix[currentLocation[0]][currentLocation[1]]);
 
         if(isOutOfMatrix(matrix, nextLocation)) {
@@ -119,4 +121,10 @@ const totalLocations = (input) => {
     return countVisitedLocations(matrix);
 }
 
-export {convertToMatrix, findGuard, getNextLocation, moveGuardTo, turnGuard, hasAny, isOutOfMatrix, totalLocations};
+
+const main = () => {
+    let input = fs.readFileSync("./day-6/input.txt").toString("utf-8");
+    console.log("Total: ", totalLocations(input));
+}
+
+export {convertToMatrix, findGuard, getNextLocation, moveGuardTo, turnGuard, hasAny, isOutOfMatrix, totalLocations, main};
