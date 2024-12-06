@@ -3,21 +3,31 @@ const convertToMatrix = (input) => {
         .map(line => line.split(""));
 }
 
-const findGuard = (matrix) => {
-    let location = [];
-    matrix.forEach((row, index) => {
-        let found = row.indexOf("^");
+const hasAny = (row, arrayToFind) => {
+    for (let i = 0; i < arrayToFind.length; i++){
+        const item = arrayToFind[i];
+        let found = row.indexOf(item);
         if(found !== -1) {
-            location = [index, found];
+            return found;
         }
-    });
-
-    return location;
+    }
+    return -1;
 }
 
-const moveGuardTo = (givenMatrix, [x, y]) => {
+const findGuard = (matrix) => {
+    for (let index = 0; index < matrix.length; index++){
+        const row = matrix[index];
+        let found = hasAny(row, ["^", ">", "v", "<"]);
+        if(found !== -1) {
+            return [index, found];
+        }
+    }
+
+    return [];
+}
+
+const moveGuardTo = (givenMatrix, [oldX, oldY], [x, y]) => {
     let matrix  = structuredClone(givenMatrix);
-    let [oldX, oldY] = findGuard(matrix);
     matrix[oldX][oldY] = "X";
     matrix[x][y] = "^";
     return matrix;
@@ -27,11 +37,10 @@ const getTopLocation = ([x, y]) => {
     return [x-1, y];
 }
 
-const turnGuard = (givenMatrix) => {
+const turnGuard = (givenMatrix, [x, y]) => {
     let matrix  = structuredClone(givenMatrix);
-    let [x, y] = findGuard(matrix);
     matrix[x][y] = ">";
     return matrix;
 }
 
-export {convertToMatrix, findGuard, getTopLocation, moveGuardTo, turnGuard};
+export {convertToMatrix, findGuard, getTopLocation, moveGuardTo, turnGuard, hasAny};

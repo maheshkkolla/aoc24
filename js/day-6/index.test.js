@@ -1,4 +1,4 @@
-import {convertToMatrix, findGuard, getTopLocation, moveGuardTo, turnGuard} from "./index.js";
+import {convertToMatrix, findGuard, getTopLocation, moveGuardTo, turnGuard, hasAny} from "./index.js";
 
 describe("Day 6", () => {
 
@@ -27,8 +27,22 @@ describe("Day 6", () => {
     describe("findGuard", () => {
         test("should find the posiition of the gaurd", () => {
             expect(findGuard(matrix)).toEqual([6, 4]);
-
         });
+
+        test("should work after turn right", () => {
+            let newMatrix = turnGuard(matrix, [6, 4]);
+            expect(findGuard(newMatrix)).toEqual([6, 4]);
+        });
+    });
+
+    describe("hasAny", () => {
+       test("should return the location of any", () => {
+           expect(hasAny([".", "."], ["^", ">", "v", "<"])).toEqual(-1);
+           expect(hasAny([".", ".", "^"], ["^", ">", "v", "<"])).toEqual(2);
+           expect(hasAny([".", "<", "."], ["^", ">", "v", "<"])).toEqual(1);
+           expect(hasAny(["v", ".", "."], ["^", ">", "v", "<"])).toEqual(0);
+           expect(hasAny([".", ".", ">"], ["^", ">", "v", "<"])).toEqual(2);
+       });
     });
 
     describe("getTopLocation", () => {
@@ -40,20 +54,25 @@ describe("Day 6", () => {
 
     describe("moveGuardTo", () => {
         test("should move the guard to the new given location", () => {
-            let newMatrix = moveGuardTo(matrix, [5, 4]);
+            let newMatrix = moveGuardTo(matrix, [6, 4],[5, 4]);
             expect(findGuard(newMatrix)).toEqual([5, 4]);
         });
 
         test("should mark old location", () => {
-            let newMatrix = moveGuardTo(matrix, [5, 4]);
+            let newMatrix = moveGuardTo(matrix, [6, 4],[5, 4]);
             expect(newMatrix[6][4]).toEqual("X");
         });
     });
 
     describe("turnGuard", () => {
-       test("should turn the guard righ side 90 degrees", () => {
-           let newMatrix = turnGuard(matrix);
+       test("should turn the guard right", () => {
+           let newMatrix = turnGuard(matrix, [6, 4]);
            expect(newMatrix[6][4]).toEqual(">");
        });
+
+       // test("should turn the guard down", () => {
+       //     let newMatrix = turnGuard(turnGuard(matrix));
+       //     expect(newMatrix[6][4]).toEqual("v");
+       // });
     });
 });
