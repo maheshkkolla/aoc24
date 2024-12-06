@@ -26,4 +26,10 @@ const getTopLocation = ([x, y]) => {
     return [x-1, y];
 }
 
-export {convertToMatrix, findGuard, getTopLocation, moveGuardTo};
+const turnGuard = (matrix) => {
+    let [x, y] = findGuard(matrix);
+    matrix[x][y] = ">";
+    return matrix;
+}
+
+export {convertToMatrix, findGuard, getTopLocation, moveGuardTo, turnGuard};

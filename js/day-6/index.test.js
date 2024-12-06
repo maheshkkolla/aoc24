@@ -1,4 +1,4 @@
-import {convertToMatrix, findGuard, getTopLocation, moveGuardTo} from "./index.js";
+import {convertToMatrix, findGuard, getTopLocation, moveGuardTo, turnGuard} from "./index.js";
 
 describe("Day 6", () => {
 
@@ -43,5 +43,17 @@ describe("Day 6", () => {
             let newMatrix = moveGuardTo(matrix, [5, 4]);
             expect(findGuard(newMatrix)).toEqual([5, 4]);
         });
+
+        test("should mark old location", () => {
+            let newMatrix = moveGuardTo(matrix, [5, 4]);
+            expect(newMatrix[6][4]).toEqual("X");
+        });
+    });
+
+    describe("turnGuard", () => {
+       test("should turn the guard righ side 90 degrees", () => {
+           let newMatrix = turnGuard(matrix);
+           expect(newMatrix[6][4]).toEqual(">");
+       });
     });
 });
