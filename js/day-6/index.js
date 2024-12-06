@@ -15,4 +15,15 @@ const findGuard = (matrix) => {
     return location;
 }
 
-export {convertToMatrix, findGuard};
+const moveGuardTo = (matrix, [x, y]) => {
+    let [oldX, oldY] = findGuard(matrix);
+    matrix[oldX][oldY] = "X";
+    matrix[x][y] = "^";
+    return matrix;
+};
+
+const getTopLocation = ([x, y]) => {
+    return [x-1, y];
+}
+
+export {convertToMatrix, findGuard, getTopLocation, moveGuardTo};
