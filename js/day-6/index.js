@@ -15,7 +15,8 @@ const findGuard = (matrix) => {
     return location;
 }
 
-const moveGuardTo = (matrix, [x, y]) => {
+const moveGuardTo = (givenMatrix, [x, y]) => {
+    let matrix  = structuredClone(givenMatrix);
     let [oldX, oldY] = findGuard(matrix);
     matrix[oldX][oldY] = "X";
     matrix[x][y] = "^";
@@ -26,7 +27,8 @@ const getTopLocation = ([x, y]) => {
     return [x-1, y];
 }
 
-const turnGuard = (matrix) => {
+const turnGuard = (givenMatrix) => {
+    let matrix  = structuredClone(givenMatrix);
     let [x, y] = findGuard(matrix);
     matrix[x][y] = ">";
     return matrix;
