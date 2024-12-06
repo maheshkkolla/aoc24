@@ -1,4 +1,4 @@
-import {convertToMatrix, findGuard, getTopLocation, moveGuardTo, turnGuard, hasAny} from "./index.js";
+import {convertToMatrix, findGuard, getNextLocation, moveGuardTo, turnGuard, hasAny} from "./index.js";
 
 describe("Day 6", () => {
 
@@ -47,8 +47,20 @@ describe("Day 6", () => {
 
     describe("getTopLocation", () => {
         test("should get the top location of the given location", () => {
-            expect(getTopLocation([6, 4])).toEqual([5, 4]);
-            expect(getTopLocation([2, 2])).toEqual([1, 2]);
+            expect(getNextLocation([6, 4], "^")).toEqual([5, 4]);
+            expect(getNextLocation([2, 2], "^")).toEqual([1, 2]);
+        });
+
+        test("should get the right location of the given location", () => {
+            expect(getNextLocation([6, 4], ">")).toEqual([6, 5]);
+        });
+
+        test("should get the down location of the given location", () => {
+            expect(getNextLocation([6, 4], "v")).toEqual([7, 4]);
+        });
+
+        test("should get the left location of the given location", () => {
+            expect(getNextLocation([6, 4], "<")).toEqual([6, 3]);
         });
     });
 

@@ -33,8 +33,23 @@ const moveGuardTo = (givenMatrix, [oldX, oldY], [x, y]) => {
     return matrix;
 };
 
-const getTopLocation = ([x, y]) => {
-    return [x-1, y];
+const getNextLocation = ([x, y], direction) => {
+
+    if(direction === "^") {
+        return [x-1, y];
+    }
+
+    if(direction === ">") {
+        return [x, y+1];
+    }
+
+    if(direction === "v") {
+        return [x+1, y];
+    }
+
+    if(direction === "<") {
+        return [x, y-1];
+    }
 }
 
 const turnGuard = (givenMatrix, [x, y]) => {
@@ -61,4 +76,4 @@ const turnGuard = (givenMatrix, [x, y]) => {
     return matrix;
 }
 
-export {convertToMatrix, findGuard, getTopLocation, moveGuardTo, turnGuard, hasAny};
+export {convertToMatrix, findGuard, getNextLocation, moveGuardTo, turnGuard, hasAny};
