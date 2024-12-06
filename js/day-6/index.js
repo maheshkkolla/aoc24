@@ -76,4 +76,12 @@ const turnGuard = (givenMatrix, [x, y]) => {
     return matrix;
 }
 
-export {convertToMatrix, findGuard, getNextLocation, moveGuardTo, turnGuard, hasAny};
+const isOutOfMatrix = (matrix, [x, y]) => {
+    if(x >= matrix.length || x < 0 || y >= matrix[0].length || y < 0) {
+        return true;
+    }
+
+    return false;
+}
+
+export {convertToMatrix, findGuard, getNextLocation, moveGuardTo, turnGuard, hasAny, isOutOfMatrix};

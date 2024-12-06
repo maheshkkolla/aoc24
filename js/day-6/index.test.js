@@ -1,4 +1,4 @@
-import {convertToMatrix, findGuard, getNextLocation, moveGuardTo, turnGuard, hasAny} from "./index.js";
+import {convertToMatrix, findGuard, getNextLocation, moveGuardTo, turnGuard, hasAny, isOutOfMatrix} from "./index.js";
 
 describe("Day 6", () => {
 
@@ -104,5 +104,20 @@ describe("Day 6", () => {
            let newMatrix = turnGuard(turnGuard(turnGuard(turnGuard(matrix, location), location), location), location);
            expect(newMatrix[6][4]).toEqual("^");
        });
+    });
+
+    describe("isOutOfMatrix", () => {
+        test("should return false if the location is not out of matrix", () => {
+            expect(isOutOfMatrix(matrix, [1,3])).toBeFalsy();
+            expect(isOutOfMatrix(matrix, [0, 0])).toBeFalsy();
+            expect(isOutOfMatrix(matrix, [4, 5])).toBeFalsy();
+        });
+
+        test("should return true if the location is out of matrix", () => {
+            expect(isOutOfMatrix(matrix, [-1,3])).toBeTruthy();
+            expect(isOutOfMatrix(matrix, [0, -1])).toBeTruthy();
+            expect(isOutOfMatrix(matrix, [10, 5])).toBeTruthy();
+            expect(isOutOfMatrix(matrix, [2, 10])).toBeTruthy();
+        });
     });
 });
