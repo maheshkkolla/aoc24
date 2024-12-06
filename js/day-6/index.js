@@ -121,10 +121,43 @@ const totalLocations = (input) => {
     return countVisitedLocations(matrix);
 }
 
+const isInLoop = (givenMatrix) => {
+    let matrix = structuredClone(givenMatrix);
+    let currentLocation = findGuard(matrix);
+    let traversed = {};
+    while (!isOutOfMatrix(matrix, currentLocation)) {
+        let currentDirection = matrix[currentLocation[0]][currentLocation[1]];
+        let nextLocation = getNextLocation(currentLocation, currentDirection);
+
+        let key = `${currentLocation}-${currentDirection}`;
+        if(traversed[key]) {
+            return true;
+        }
+        traversed[key] = true;
+
+
+
+        if(isOutOfMatrix(matrix, nextLocation)) {
+            matrix[currentLocation[0]][currentLocation[1]] = "X";
+            break;
+        }
+
+        if (matrix[nextLocation[0]][nextLocation[1]] === "#") {
+            matrix = turnGuard(matrix, currentLocation);
+            continue;
+        }
+
+        matrix = moveGuardTo(matrix, currentLocation, nextLocation);
+        currentLocation = nextLocation;
+    }
+
+    return false;
+}
+
 
 const main = () => {
     let input = fs.readFileSync("./day-6/input.txt").toString("utf-8");
     console.log("Total: ", totalLocations(input));
 }
 
-export {convertToMatrix, findGuard, getNextLocation, moveGuardTo, turnGuard, hasAny, isOutOfMatrix, totalLocations, main};
+export {convertToMatrix, findGuard, getNextLocation, moveGuardTo, turnGuard, hasAny, isOutOfMatrix, totalLocations, main, isInLoop};

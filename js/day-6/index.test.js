@@ -1,4 +1,4 @@
-import {convertToMatrix, findGuard, getNextLocation, moveGuardTo, turnGuard, hasAny, isOutOfMatrix, totalLocations} from "./index.js";
+import {convertToMatrix, findGuard, getNextLocation, moveGuardTo, turnGuard, hasAny, isOutOfMatrix, totalLocations, isInLoop} from "./index.js";
 
 describe("Day 6", () => {
 
@@ -127,5 +127,27 @@ describe("Day 6", () => {
             let actual = totalLocations(input);
             expect(actual).toEqual(41);
         });
+    });
+
+    describe("isInLoop", () => {
+       test("should return false when the given matrix is not in loop", () => {
+           expect(isInLoop(matrix)).toBeFalsy();
+       });
+
+       test("should return true when the given matrix is not in loop", () => {
+           let loopMatrix = [
+               [".", ".", ".", ".", "#", ".", ".", ".", ".", "."],
+               [".", ".", ".", ".", ".", ".", ".", ".", ".", "#"],
+               [".", ".", ".", ".", ".", ".", ".", ".", ".", "."],
+               [".", ".", "#", ".", ".", ".", ".", ".", ".", "."],
+               [".", ".", ".", ".", ".", ".", ".", "#", ".", "."],
+               [".", ".", ".", ".", ".", ".", ".", ".", ".", "."],
+               [".", "#", ".", "#", "^", ".", ".", ".", ".", "."],
+               [".", ".", ".", ".", ".", ".", ".", ".", "#", "."],
+               ["#", ".", ".", ".", ".", ".", ".", ".", ".", "."],
+               [".", ".", ".", ".", ".", ".", "#", ".", ".", "."],
+           ];
+           expect(isInLoop(loopMatrix)).toBeTruthy();
+       });
     });
 });
